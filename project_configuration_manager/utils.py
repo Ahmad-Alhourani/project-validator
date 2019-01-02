@@ -17,6 +17,7 @@ def get_diff_config(current_config, last_config):
     """
     this will return the difference between  current config and input config
     :param last_config:  old config data
+    :param current_config:  current config data
     :type last_config: dict
     :return: dict with keys
       "added" : array of added entities

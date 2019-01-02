@@ -1,0 +1,1364 @@
+{
+  "entities": [
+    {
+      "name": "level",
+      "model": "Level",
+      "table": "levels",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inView": true,
+          "inIndex": false
+        },
+        {
+          "title": "Name",
+          "name": "name",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        },
+        {
+          "title": "Visible Radius",
+          "name": "visible_radius",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        },
+        {
+          "title": "Order",
+          "name": "order",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [
+        {
+          "name": "Required Gems",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "gem",
+            "middleEntity": "level gem",
+            "pivotFields": [
+              "count"
+            ],
+            "foreignKey": "level_id",
+            "otherKey": "gem_id",
+            "localKey": "id"
+          },
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        }
+      ],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "gem",
+      "model": "Gem",
+      "table": "gems",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Name",
+          "name": "name",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": false,
+          "fillable": true,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Level",
+          "name": "level_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "level",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Clickable Radius",
+          "name": "clickable_radius",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [
+        {
+          "name": "sightings",
+          "type": "relation",
+          "relation": {
+            "type": "1tm",
+            "fieldView": "founded_at",
+            "relatedEntity": "gem sighting",
+            "foreignKey": "gem_id",
+            "localKey": "id",
+            "otherKey": "test"
+          }
+        },
+        {
+          "name": "boxes",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "box",
+            "middleEntity": "box gem",
+            "pivotFields": [
+              "count"
+            ],
+            "foreignKey": "gem_id",
+            "otherKey": "box_id",
+            "localKey": "id"
+          }
+        },
+        {
+          "name": "Players",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "player",
+            "middleEntity": "gem sighting",
+            "pivotFields": [
+              "lat",
+              "lng"
+            ],
+            "foreignKey": "gem_id",
+            "otherKey": "player_id",
+            "localKey": "id"
+          }
+        }
+      ],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "player",
+      "model": "Player",
+      "table": "players",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Full Name",
+          "name": "name",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Token",
+          "name": "token",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Birth Date",
+          "name": "birth_date",
+          "dbType": {
+            "type": "date"
+          },
+          "viewType": {
+            "type": "date"
+          },
+          "validations": "required",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        },
+        {
+          "title": "Level",
+          "name": "level_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "level",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [
+        {
+          "name": "inventory",
+          "type": "relation",
+          "relation": {
+            "type": "1tm",
+            "fieldView": "count",
+            "relatedEntity": "inventory",
+            "foreignKey": "player_id",
+            "localKey": "id",
+            "otherKey": "test"
+          },
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        }
+      ],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "box",
+      "model": "Box",
+      "table": "boxes",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Name",
+          "name": "name",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Clickable Radius",
+          "name": "clickable_radius",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Level",
+          "name": "level_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "level",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [
+        {
+          "name": "Required Gems",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "gem",
+            "middleEntity": "box gem",
+            "pivotFields": [
+              "count"
+            ],
+            "foreignKey": "box_id",
+            "otherKey": "gem_id",
+            "localKey": "id"
+          },
+          "inForm": true,
+          "inView": true,
+          "inIndex": true
+        },
+        {
+          "name": "Players",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "player",
+            "middleEntity": "box sighting",
+            "pivotFields": [
+              "lat",
+              "lng"
+            ],
+            "foreignKey": "box_id",
+            "otherKey": "player_id",
+            "localKey": "id"
+          }
+        },
+        {
+          "name": "Items",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "item",
+            "middleEntity": "box item",
+            "foreignKey": "box_id",
+            "otherKey": "item_id",
+            "localKey": "id"
+          }
+        },
+        {
+          "name": "sightings",
+          "type": "relation",
+          "relation": {
+            "type": "1tm",
+            "fieldView": "founded_at",
+            "relatedEntity": "box sighting",
+            "foreignKey": "box_id",
+            "localKey": "id",
+            "otherKey": "test"
+          }
+        }
+      ],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true,
+        "cachable": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "item",
+      "model": "Item",
+      "table": "items",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Name",
+          "name": "name",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Clickable Radius",
+          "name": "clickable_radius",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [
+        {
+          "name": "Boxes",
+          "type": "relation",
+          "relation": {
+            "type": "mtm",
+            "fieldView": "name",
+            "relatedEntity": "box",
+            "middleEntity": "box item",
+            "foreignKey": "item_id",
+            "otherKey": "box_id",
+            "localKey": "id"
+          }
+        }
+      ],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "inventory",
+      "model": "Inventory",
+      "table": "inventory",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Player",
+          "name": "player_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "player",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Inventoryable Id",
+          "name": "inventoryable_id",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Inventoryable Type",
+          "name": "inventoryable_type",
+          "dbType": {
+            "type": "string"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Count",
+          "name": "count",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true,
+        "cachable": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "level gem",
+      "model": "LevelGem",
+      "table": "level_gems",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Gem Name",
+          "name": "gem_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "gem",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Level Name",
+          "name": "level_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "level",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Count",
+          "name": "count",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "gem sighting",
+      "model": "GemSighting",
+      "table": "gem_sightings",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Gem",
+          "name": "gem_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "gem",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Player",
+          "name": "player_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "player",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Founded At",
+          "name": "founded_at",
+          "dbType": {
+            "type": "date"
+          },
+          "viewType": {
+            "type": "date"
+          },
+          "validations": "",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Lat",
+          "name": "lat",
+          "dbType": {
+            "type": "double",
+            "default": 9.0
+          },
+          "viewType": {
+            "type": "decimal"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        },
+        {
+          "title": "Lng",
+          "name": "lng",
+          "dbType": {
+            "type": "double",
+            "default": 9.0
+          },
+          "viewType": {
+            "type": "decimal"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "box sighting",
+      "model": "BoxSighting",
+      "table": "box_sightings",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Player",
+          "name": "player_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "player",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Box",
+          "name": "box_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "box",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Founded At",
+          "name": "founded_at",
+          "dbType": {
+            "type": "date"
+          },
+          "viewType": {
+            "type": "date"
+          },
+          "validations": "required",
+          "searchable": false,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Lat",
+          "name": "lat",
+          "dbType": {
+            "type": "double",
+            "default": 9.0
+          },
+          "viewType": {
+            "type": "decimal"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        },
+        {
+          "title": "Lng",
+          "name": "lng",
+          "dbType": {
+            "type": "double",
+            "default": 9.0
+          },
+          "viewType": {
+            "type": "decimal"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": false
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "box gem",
+      "model": "BoxGem",
+      "table": "box_gems",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Gem Name",
+          "name": "gem_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "gem",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Box Name",
+          "name": "box_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "box",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Count",
+          "name": "count",
+          "dbType": {
+            "type": "Integer"
+          },
+          "viewType": {
+            "type": "Integer"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    },
+    {
+      "name": "box item",
+      "model": "BoxItem",
+      "table": "box_items",
+      "fields": [
+        {
+          "title": "Id",
+          "name": "id",
+          "dbType": {
+            "type": "increments",
+            "primary": true
+          },
+          "viewType": {},
+          "searchable": false,
+          "fillable": false,
+          "inForm": false,
+          "inIndex": false
+        },
+        {
+          "title": "Item Name",
+          "name": "item_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "item",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        },
+        {
+          "title": "Box Name",
+          "name": "box_id",
+          "dbType": {
+            "type": "Integer",
+            "foreign": {
+              "relatedEntity": "box",
+              "fieldView": "name",
+              "relatedField": "id"
+            }
+          },
+          "viewType": {
+            "type": "text"
+          },
+          "validations": "required",
+          "searchable": true,
+          "fillable": true,
+          "inForm": true,
+          "inIndex": true
+        }
+      ],
+      "relations": [],
+      "extraProperties": {
+        "softDelete": true,
+        "timestamp": true
+      },
+      "generation": {
+        "model": true,
+        "createEvent": true,
+        "updateEvent": true,
+        "deleteEvent": true,
+        "listener": true,
+        "repository": true,
+        "createTable": true,
+        "migrateTable": true,
+        "createRequest": true,
+        "updateRequest": true,
+        "controller": true,
+        "route": true,
+        "breadcrumbs": true,
+        "lang": true,
+        "view": true,
+        "apiCreateRequest": true,
+        "apiUpdateRequest": true,
+        "apiController": true,
+        "apiRoute": true
+      }
+    }
+  ]
+}
