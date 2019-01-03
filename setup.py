@@ -10,6 +10,6 @@ setup(name='ValidatorManager',
       url='https://gitlab.com/devyzer/project-validator.git',
       packages=find_packages(),
       install_requires=['inflect', 'colander', 'translationstring',
-                        '-e git://github.com/Ahmad-Alhourani/project-configuration-manager.git#egg=ProjectConfigurationManager'
+                        '-e git://github.com/devyzer/project-configuration-manager.git#egg=ProjectConfigurationManager'
                         ],
       )

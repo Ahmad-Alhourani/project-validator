@@ -1,4 +1,4 @@
-from app.project_config_manager import CurrentConfig
+from configuration.project_config_manager import CurrentConfig
 
 from json_schema import JsonSchema
 
@@ -28,6 +28,7 @@ class Validator:
         return True
 
     def logic_validation(self, json_data):
+
         self._obj_config = CurrentConfig.from_dict(json_data)
         self._collect_config_data()
         # if self.get_status() is True:
