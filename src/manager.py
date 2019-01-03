@@ -9,6 +9,17 @@ class Manager:
         self._status = True
         self._messages = []
 
+    def add_entities(self, entities_arr):
+        """
+        use this service to add array of entities to config data
+        :param entities_arr:  array of entities
+        :return: update config data and return true
+        """
+        temp = copy.deepcopy(self._config_dict)
+        for entity in entities_arr:
+            temp['entities'].append(entity)
+        self._validate_operation(temp)
+
     def add_entity(self, entity):
         """
         use this service to add entity to config data

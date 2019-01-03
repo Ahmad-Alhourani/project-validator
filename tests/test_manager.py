@@ -86,6 +86,14 @@ class TestServices(unittest.TestCase):
         self.manager.add_entity(entity1)
         self.manager.add_entity(entity2)
 
+    def test_add_entities(self):
+        self.init_manager()
+        entities = [{"name": "test1"}, {"name": "test2"}, {"name": "test3"}]
+        self.manager.add_entities(entities)
+        expected_result = {'entities': [{'name': 'test'}, {'name': 'test1'}, {'name': 'test2'}, {'name': 'test3'}]}
+        self.assertDictEqual(self.manager.get_config_dict(), expected_result)
+        self.assertTrue(self.manager.get_status())
+
     def test_add_entity(self):
         self.init_manager()
         entity = {"name": "test1"}
