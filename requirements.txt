@@ -1,5 +1,5 @@
 colander==1.5.1
 inflect==2.1.0
 iso8601==0.1.12
--e git://github.com/Ahmad-Alhourani/project-configuration-manager.git@d1f2020133b15544546f9bad086edab1b62a7ad6#egg=ProjectConfigurationManager
+-e git://gitlab.com/devyzer/project-configuration-manager.git#egg=ProjectConfigurationManager
 translationstring==1.3
