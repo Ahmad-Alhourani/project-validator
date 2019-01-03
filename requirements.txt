@@ -1,3 +1,3 @@
 colander
--e git://github.com/Ahmad-Alhourani/project-configuration-manager.git#egg=ProjectConfigurationManager
+-e git://github.com/Ahmad-Alhourani/project-configuration-manager.git#egg=project_configuration_manager
 
