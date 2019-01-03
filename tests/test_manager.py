@@ -121,7 +121,8 @@ class TestServices(unittest.TestCase):
         self.init_manager()
         field = {"name": "field1", "dbType": {"type": "integer"}}
         self.manager.add_field("test", field)
-        expected_result = {'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'integer'}}]}]}
+        expected_result = {
+            'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'integer'}}]}]}
         self.assertDictEqual(self.manager.get_config_dict(), expected_result)
         self.assertTrue(self.manager.get_status())
 
@@ -130,7 +131,8 @@ class TestServices(unittest.TestCase):
         field = {"name": "field1", "dbType": {"type": "integer"}}
         self.manager.add_field("test", field)
         self.manager.add_field("test", field)
-        expected_result = {'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'integer'}}]}]}
+        expected_result = {
+            'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'integer'}}]}]}
         self.assertDictEqual(self.manager.get_config_dict(), expected_result)
         self.assertFalse(self.manager.get_status())
 
@@ -140,7 +142,8 @@ class TestServices(unittest.TestCase):
         self.manager.add_field("test", field)
         field2 = {"name": "field1", "dbType": {"type": "Integer"}}
         self.manager.update_field("test", "field1", field2)
-        expected_result = {'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'Integer'}}]}]}
+        expected_result = {
+            'entities': [{'name': 'test', 'fields': [{'name': 'field1', 'dbType': {'type': 'Integer'}}]}]}
         self.assertDictEqual(self.manager.get_config_dict(), expected_result)
         self.assertTrue(self.manager.get_status())
 
