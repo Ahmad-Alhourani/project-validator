@@ -347,7 +347,7 @@ class Validator:
     def _validate_view_type(self, field, entity):
         view_type = field.view_type.type
         view_types = ["Integer", "integer", "decimal", "text", "textarea", "date", "checkbox", "select", "img", "image",
-                      "multiselect", "password", "email", "datetime"]
+                      "multiselect", "password", "email", "datetime", "token"]
         if view_type is not None:
             if view_type not in view_types:
                 return self._messages.append(
