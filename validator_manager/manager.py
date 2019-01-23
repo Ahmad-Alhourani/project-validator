@@ -1,5 +1,5 @@
-from utils import is_entity_exist, is_field_exist, is_relation_exist
-from validator import Validator
+from .utils import is_entity_exist, is_field_exist, is_relation_exist
+from .validator import Validator
 import copy
 
 

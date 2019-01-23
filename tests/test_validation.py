@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from validator import Validator
+from validator_manager.validator import Validator
 
 
 class TestServices(unittest.TestCase):

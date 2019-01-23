@@ -1,6 +1,6 @@
 import unittest
 
-from manager import Manager
+from validator_manager.manager import Manager
 
 
 class TestServices(unittest.TestCase):

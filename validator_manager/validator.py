@@ -1,6 +1,6 @@
 from configuration.project_config_manager import CurrentConfig
 
-from json_schema import JsonSchema
+from .json_schema import JsonSchema
 
 
 class Validator:
